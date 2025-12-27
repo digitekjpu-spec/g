@@ -66,4 +66,26 @@ button {
 </form>
 
 <script>
-cons
+const form = document.getElementById("complaintForm");
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbxaGWhpgiwMOb6e9AWqOEOXfrx-dsNFo7xzdIPbqYYVBFD6mAL-mohotCp0KaAtVvGGkQ/exec", {
+        method: "POST",
+        body: formData
+    })
+    .then(() => {
+        document.getElementById("msg").textContent = "تم الإرسال بنجاح ✅";
+        form.reset();
+    })
+    .catch(() => {
+        document.getElementById("msg").textContent = "حدث خطأ ❌";
+    });
+});
+</script>
+
+</body>
+</html>
